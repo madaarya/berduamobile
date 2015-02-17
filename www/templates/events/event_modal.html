@@ -1,0 +1,27 @@
+<div class="modal">
+  <!-- Modal header bar -->
+  <ion-header-bar class="bar-secondary">
+    <h1 class="title">New Event</h1>
+    <button class="button button-clear button-positive" ng-click="closeNewEvent()">Cancel</button>
+  </ion-header-bar>
+
+  <!-- Modal content area -->
+  <ion-content>
+
+    <form ng-submit="createEvent()">
+      <div class="list">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Title</span>
+          <input type="text" placeholder="Title" ng-model="event.title">
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Note</span>
+          <input type="text" placeholder="Note" ng-model="event.note">
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive">Create Event</button>
+      </div>
+    </form>
+  </ion-content>
+</div>

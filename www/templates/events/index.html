@@ -1,0 +1,15 @@
+<ion-view title="List Event">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon" ng-click="newEvent()">
+      <i class="icon ion-compose"></i>
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="event in events" type="item-text-wrap" href="#/tab/event/{{event.rowid}}">
+        <h3>{{event.title}}</h3>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
