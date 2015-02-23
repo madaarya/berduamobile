@@ -2,14 +2,18 @@ angular.module('berdua.controllers', [])
 
 
 // A simple controller that fetches a list of data from a service
-.controller('EventIndexCtrl', function($scope, Event, $ionicModal, $ionicPlatform) {
+.controller('EventIndexCtrl', function($scope, Event, $ionicModal, $ionicPlatform, $location, $ionicPopup) {
+
+  $scope.getAll = function(){
+    Event.all().then(function(result){
+      $scope.events = result;
+    });
+  }
 
   $scope.event = [];
 
   $ionicPlatform.ready(function () {
-    Event.all().then(function(result){
-      $scope.events = result;
-    });
+    $scope.getAll();
   });
 
   $ionicModal.fromTemplateUrl('templates/events/event_modal.html', function(modal) {
@@ -27,11 +31,27 @@ angular.module('berdua.controllers', [])
     $scope.eventModal.hide();
   };
 
-  $scope.createNewUser = function () {
-    console.log("create start");
+  $scope.createEvent = function () {
     Event.create($scope.event);
-    $location.path('/user-list');
-  }
+    $scope.eventModal.hide();
+    $scope.getAll();
+  };
+
+  $scope.destroy = function(item) {
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Delete event',
+      template: 'Are you sure?'
+    });
+    confirmPopup.then(function(res) {
+     if(res) {
+        Event.destroy(item);
+        $scope.getAll();
+     } else {
+        confirmPopup.close();
+     }
+    });
+  };
+
 
 })
 

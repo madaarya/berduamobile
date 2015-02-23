@@ -86,18 +86,18 @@ angular.module('berdua.services', [])
   }
 
   self.create = function(event) {
-    var parameters = [event.title, event.name];
+    var parameters = [event.title, event.note];
     return DBA.query("INSERT INTO events (title, note) VALUES (?,?)", parameters);
   }
  
   self.destroy = function(event) {
-    var parameters = [event.id];
+    var parameters = [event.rowid];
     return DBA.query("DELETE FROM events WHERE rowid = (?)", parameters);
   }
  
   self.update = function(origevent, editevent) {
-    var parameters = [editevent.id, editevent.name, origevent.id];
-    return DBA.query("UPDATE events SET id = (?), title = (?) WHERE rowid = (?)", parameters);
+    var parameters = [editevent.title, editevent.note, origevent.rowid];
+    return DBA.query("UPDATE events SET title = (?), note = (?) WHERE rowid = (?)", parameters);
   }
  
   return self;
